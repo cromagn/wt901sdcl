@@ -1,7 +1,5 @@
 import os
 
-# 定义桌面路径和文件路径
-
 import threading
 
 tempBuffer = []
@@ -112,12 +110,12 @@ if __name__ == "__main__":
 
         print("Transferring files, please wait......")
 
-        # 将文件路径分割成各个组成部分
+       
         components = filepath.split('.')
-        # 替换倒数第二个组成部分为新的目录名称
+        
         components[-2] = components[-2] + "_new"
         components[-1] = "txt"
-        # 将组成部分重新连接起来
+
         new_filepath = '.'.join(components)
 
         lines = ["Time\tAccX\tAccY\tAccZ\tAsX\tAsY\tAsZ\tAngX\tAngY\tAngZ\tHX\tHY\tHZ"]
@@ -131,13 +129,13 @@ if __name__ == "__main__":
 
         user_input = input("Please enter 1 to repeat execution and 2 to exit the script:")
 
-        # 判断用户输入
+    
         if user_input == "1":
-            # 用户输入1，继续循环执行脚本
+        
             continue
         elif user_input == "2":
-            # 用户输入2，退出循环和脚本
+            
             break
         else:
-            # 用户输入非法，提示用户重新输入
+        
             print("Invalid input, please re-enter!")
