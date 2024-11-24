@@ -7,7 +7,7 @@ filepath = ""
 data = []
 line = ""
 desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
-filepath = os.path.join('E:', 'WIT00011.TXT')   #Change the file name here
+filepath = os.path.join('E:', 'WIT00011.TXT')   # Change the file name here
 
 def read_file(filepath):
     try:
@@ -50,7 +50,6 @@ def processData(chunk):
         if len(tempBuffer) >= 11:
             processPack(tempBuffer[:11])
             del tempBuffer[:11]
-    # 写入文件
     write_lines_to_file(new_filepath, data)
     pass
 
@@ -70,10 +69,7 @@ def processPack(pack):
         mins = pack[6]
         second = pack[7]
         mills = pack[9] << 8 | pack[8]
-        if mills < 100:
-            print(mills)
-            print("{:03d}".format(mills))
-        line += "{}-{}-{} {}:{}:{:02d}.{:03d}\t".format(year, mon, day, hour, mins, second, mills)
+        line += "{}-{}-{} {}:{:02d}:{:02d}.{:03d}\t".format(year, mon, day, hour, mins, second, mills)
         pass
     elif pack[1] == 0x51:
         # Acc
