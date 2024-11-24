@@ -3,11 +3,10 @@ import os
 import threading
 
 tempBuffer = []
-filepath = ""
 data = []
 line = ""
-desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
 filepath = os.path.join('E:', 'WIT00011.TXT')   # Change the file name here
+
 
 def read_file(filepath):
     try:
@@ -101,37 +100,16 @@ def getSignInt16(num):
 
 
 if __name__ == "__main__":
-    while True:
-        #filepath = input("Enter the path to the file: ")
 
-        print("Transferring files, please wait......")
+    print("Reading file, please wait......")
+    components = filepath.split('.')
+    components[-2] = components[-2] + "_new"
+    components[-1] = "txt"
+    new_filepath = '.'.join(components)
+    lines = ["Time\tAccX\tAccY\tAccZ\tAsX\tAsY\tAsZ\tAngX\tAngY\tAngZ\tHX\tHY\tHZ"]
+    write_lines_to_file(new_filepath, lines)
+    thread = threading.Thread(target=read_file, args=(filepath,))
+    thread.start()
+    thread.join()
 
-       
-        components = filepath.split('.')
-        
-        components[-2] = components[-2] + "_new"
-        components[-1] = "txt"
-
-        new_filepath = '.'.join(components)
-
-        lines = ["Time\tAccX\tAccY\tAccZ\tAsX\tAsY\tAsZ\tAngX\tAngY\tAngZ\tHX\tHY\tHZ"]
-        write_lines_to_file(new_filepath, lines)
-
-        thread = threading.Thread(target=read_file, args=(filepath,))
-        thread.start()
-        thread.join()
-
-        print("File output:  " + new_filepath)
-
-        user_input = input("Please enter 1 to repeat execution and 2 to exit the script:")
-
-    
-        if user_input == "1":
-        
-            continue
-        elif user_input == "2":
-            
-            break
-        else:
-        
-            print("Invalid input, please re-enter!")
+    print("File output:  " + new_filepath)
